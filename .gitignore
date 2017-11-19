@@ -1,0 +1,12 @@
+.DS_Store
+
+*.love
+dist-win
+dist-mac
+dist-linux
+
+node_modules
+
+build/
+
+config.json
