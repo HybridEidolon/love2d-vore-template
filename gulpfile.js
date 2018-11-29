@@ -217,7 +217,7 @@ gulp.task('dist:win:download-love', function (callback) {
         callback(err);
         return;
       }
-      const req = request('https://bitbucket.org/rude/love/downloads/love-0.10.2-win32.zip').pipe(fs.createWriteStream(Path.join(__dirname, 'dist-win', 'love.zip')));
+      const req = request('https://bitbucket.org/rude/love/downloads/love-11.2-win32.zip').pipe(fs.createWriteStream(Path.join(__dirname, 'dist-win', 'love.zip')));
       req.on('close', () => callback());
       req.on('error', (e) => callback(e));
     });
@@ -234,7 +234,7 @@ gulp.task('dist:win:extract-love', ['dist:win:download-love'], function (callbac
     unzipStream.on('close', () => {
       setTimeout(() => {
         // We need the delay to ensure the unzip actually finishes writing...
-        fs.rename(Path.join(__dirname, 'dist-win', 'love-0.10.2-win32'), Path.join(__dirname, 'dist-win', 'dist'), (err) => {
+        fs.rename(Path.join(__dirname, 'dist-win', 'love-11.2.0-win32'), Path.join(__dirname, 'dist-win', 'dist'), (err) => {
           if (err) {
             return callback(err);
           }
@@ -303,7 +303,7 @@ gulp.task('dist:mac:download-love', function (callback) {
         callback(err);
         return;
       }
-      const req = request('https://bitbucket.org/rude/love/downloads/love-0.10.2-macosx-x64.zip').pipe(fs.createWriteStream(Path.join(__dirname, 'dist-mac', 'love.zip')));
+      const req = request('https://bitbucket.org/rude/love/downloads/love-11.2-macos.zip').pipe(fs.createWriteStream(Path.join(__dirname, 'dist-mac', 'love.zip')));
       req.on('close', () => callback());
       req.on('error', (e) => callback(e));
     });

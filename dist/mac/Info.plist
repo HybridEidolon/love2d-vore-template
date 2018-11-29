@@ -15,11 +15,11 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>gmqgame</string>
+	<string>vore</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.10.2</string>
+	<string>11.2.0</string>
 	<key>CFBundleSignature</key>
 	<string>LoVe</string>
 	<key>CFBundleSupportedPlatforms</key>
