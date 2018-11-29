@@ -318,18 +318,22 @@ gulp.task('dist:mac:extract-love', ['dist:mac:download-love'], function (callbac
     let zipFileStream = fs.createReadStream(Path.join(__dirname, 'dist-mac', 'love.zip'));
     let unzipStream = zipFileStream.pipe(unzip.Extract({path: Path.join(__dirname, 'dist-mac')}));
     unzipStream.on('close', () => {
-      mkdirp(Path.join(__dirname, 'dist-mac', 'dist'), (err) => {
-        if (err) {
-          return callback(err);
-        }
-
-        fs.rename(Path.join(__dirname, 'dist-mac', 'love.app'), Path.join(__dirname, 'dist-mac', 'dist', `${package.name}.app`), (err) => {
+      setTimeout(() => {
+        // We need the delay to ensure the unzip actually finishes writing...
+        mkdirp(Path.join(__dirname, 'dist-mac', 'dist'), (err) => {
           if (err) {
             return callback(err);
           }
-          callback();
+
+          fs.rename(Path.join(__dirname, 'dist-mac', 'love.app'), Path.join(__dirname, 'dist-mac', 'dist', `${package.name}.app`), (err) => {
+            if (err) {
+              console.log('shit what the fuck');
+              return callback(err);
+            }
+            callback();
+          });
         });
-      });
+      }, 100);
     });
     unzipStream.on('error', (e) => {
       unzipStream.end();
