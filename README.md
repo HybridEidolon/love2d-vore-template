@@ -49,14 +49,13 @@ Choose a name for your project, and edit the following files to use that name:
 Now run the following to install the npm dependencies
 
 ```
-npm install -g gulp-cli
 npm install
 ```
 
 Next, use gulp to generate a default `config.json`. Do this on every development computer, _and do not check `config.json` in to version control_.
 
 ```
-gulp gen-default-config
+npx gulp gen-default-config
 ```
 
 You will need to edit the newly generated `config.json` and point it to the appropriate paths for each binary. Leave blank if it's optional and you don't want to use it. These are the _full_ command paths, do not rely on shell PATH!
@@ -77,19 +76,19 @@ Your `moon` and `lua` sources will go in `src`, and everything else goes in `dat
 You can use the following command to build your game code and assets:
 
 ```
-gulp build
+npx gulp build
 ```
 
 Then, enter watch mode:
 
 ```
-gulp watch
+npx gulp watch
 ```
 
 And, using the `love` exe path in your `config.json`, you can run love with:
 
 ```
-gulp run
+npx gulp run
 ```
 
 You can run `watch` and `run` at the same time if your game supports hot reloading.
