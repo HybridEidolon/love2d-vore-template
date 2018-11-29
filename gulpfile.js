@@ -32,7 +32,6 @@ gulp.task('gen-default-config', function (callback) {
       tiled: '',
       aseprite: '',
       love: '',
-      lua: '',
       butler: ''
     }
   }, 'utf8', callback);
