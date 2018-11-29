@@ -33,27 +33,9 @@ gulp.task('gen-default-config', function (callback) {
       aseprite: '',
       love: '',
       lua: '',
-      butler: '',
-      loverocks: ''
+      butler: ''
     }
   }, 'utf8', callback);
-});
-
-gulp.task('build:loverocks', ['build:moon', 'build:lua'], function (callback) {
-  let proc = childProcess.spawn(config.binaries.loverocks, ['--game', 'build', 'deps'])
-  proc.stdout.on('data', (data) => gutil.log(data.toString()));
-  proc.stderr.on('data', (data) => gutil.log(data.toString()));
-
-  proc.on('error', function (err) {
-    gutil.log(err);
-  });
-  proc.on('exit', function (code) {
-    if (code !== 0) {
-      callback(new gutil.PluginError('gulp-run-loverocks-deps', `error code ${code}`));
-      return;
-    }
-    callback();
-  });
 });
 
 gulp.task('build:lua', function () {
@@ -199,7 +181,7 @@ gulp.task('run', function (callback) {
   });
 });
 
-gulp.task('default', ['build', 'build:loverocks']);
+gulp.task('default', ['build']);
 
 gulp.task('watch', ['build'], function () {
   return gulp.watch([

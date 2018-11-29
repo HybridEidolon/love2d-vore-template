@@ -7,7 +7,6 @@
 
 ## Features
 
-- [LoveRocks] dependency integration via `gulp build:loverocks` task
 - Automatic build of [Aseprite] sources from `data` directory into .png/.json pairs for game use
 - Automatic build of [Tiled] map sources from `data` directory into .lua tables
 - All other `data` files merged into build output as-is
@@ -18,7 +17,6 @@
 - Supports Windows, macOS, and Linux build environments.
 - "Watch" mode instantly rebuilds any asset or source file as it's changed
 
-[LoveRocks]: https://github.com/Alloyed/loverocks
 [Aseprite]: https://www.aseprite.org/
 [Tiled]: http://www.mapeditor.org/
 [Moonscript]: http://moonscript.org/
@@ -33,8 +31,6 @@ Make sure you have the following installed:
 
 - [Node] 8.9 or later, including npm
 - [Love]
-- [LuaRocks]
-- [LoveRocks]; make sure LuaRocks is compatible
 
 These are optional, so long as you don't have files corrosponding to their formats in the data dir or use the `publish` command:
 
@@ -74,51 +70,14 @@ mkdir src
 
 Your `moon` and `lua` sources will go in `src`, and everything else goes in `data`. In game, the compiled output of `data` will be present at `data` as well, so e.g. you can `require` the Tiled maps at `data.maps.yourmap_tmx`.
 
-### Setting up LoveRocks
-
-Create a `conf.lua` or `conf.moon` and add the following (:
-
-```lua
-if love.filesystem then
-  require 'rocks' ()
-end
-
-function love.conf(t)
-  t.version = '0.10.2'
-
-  t.rocks_tree = 'build/rocks'
-  t.dependencies = {
-    'lunajson ~> 1.2' -- optional, just added as example
-  }
-end
-```
-
-Moonscript version: 
-
-```moonscript
-if love.filesystem
-  require('rocks')!
-
-love.conf = (t) ->
-  t.version = '0.10.2'
-
-  t.rocks_tree = 'build/rocks'
-  t.dependencies = {
-    'lunajson ~> 1.2' -- optional, just added as example
-  }
-```
-
-You can now import any (pure Lua) Luarock from [LuaRocks].
-
 [Node]: https://nodejs.org/en/
-[LuaRocks]: https://luarocks.org/
 
 ## Building and running your game
 
-You can use the following command to build your game code and assets, and also install your loverocks dependencies:
+You can use the following command to build your game code and assets:
 
 ```
-gulp build build:loverocks
+gulp build
 ```
 
 Then, enter watch mode:
@@ -138,7 +97,6 @@ You can run `watch` and `run` at the same time if your game supports hot reloadi
 
 ## Q/A
 
-- **Why is `build:loverocks` not part of `watch`?** It's a little slow even when there are no new dependencies to install.
 - **Why _vore_?** it vores your assets don't ask
 - **Can I add my own asset types?** If the tool has a batch output mode or you have some processing that can be done in JS, sure.
 
