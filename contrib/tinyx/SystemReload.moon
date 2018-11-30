@@ -2,17 +2,6 @@ System = require 'tinyx.System'
 
 local *
 
--- SystemReload can be used to automatically reinitialize systems during runtime.
--- It works by checking a set of file paths on an interval for updates, and rerunning
--- a lua chunk that exports a function for setting up world systems. It requires
--- the lua require path be unmodified from love2d's default.
-
--- Example:
--- systemInitModule = 'initsystems'
--- moduleRoots = {'system', 'tinyx', 'sub.path'}
---
--- Your systems' internal state will be destroyed on reload.
-
 lfs = love.filesystem
 getDirectoryItems = lfs.getDirectoryItems
 getInfo = lfs.getInfo
@@ -42,7 +31,10 @@ class SystemReload extends System
     @interval = @reloadInterval
 
   onAddToWorld: (world) =>
-    @initLastModified = (getInfo @systemInitModule).modtime
+    initInfo = getInfo @systemInitModule\gsub('\\.', '/') .. '.lua'
+    if initInfo == nil
+      error 'missing system init module ' .. @systemInitModule\gsub('\\.', '/') .. '.lua'
+    @initLastModified = initInfo.modtime
     @files = {}
 
     for i, v in ipairs @moduleRoots
@@ -50,19 +42,19 @@ class SystemReload extends System
       @files = enumerateRecursive pathRoot, @files
 
   update: =>
-    initLastModified = (getInfo @systemInitModule).modtime
+    initLastModified = (getInfo @systemInitModule\gsub('\\.', '/') .. '.lua').modtime
     if initLastModified != @initLastModified
-      @\reload!
+      @\reloadSystems!
       return
 
     for i, v in ipairs @files
-      info = getInfo v.name
+      info = getInfo v.path
       if info == nil or info.modtime != v.modtime
-        @\reload!
+        @\reloadSystems!
         return
 
 
-  reload: =>
+  reloadSystems: =>
     @world\clearSystems!
     for _, root in ipairs @moduleRoots
       for pkgname, _ in pairs package.loaded
