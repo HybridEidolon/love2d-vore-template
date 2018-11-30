@@ -26,7 +26,7 @@ enumerateRecursive = (path, tree) ->
   tree
 
 class SystemReload extends System
-  new: (@systemInitModule, @moduleRoots, @reload = true, @reloadInterval = 1) =>
+  new: (@systemInitModule, @moduleRoots, @reloadInterval = 1) =>
     super!
     @interval = @reloadInterval
 
