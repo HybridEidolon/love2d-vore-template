@@ -1,4 +1,4 @@
-import System from require 'systems.System'
+System = require 'tinyx.System'
 tiny = require 'tiny'
 
 class SortedSystem extends System
@@ -7,4 +7,4 @@ class SortedSystem extends System
 
   -- compare: (e1, e2) =>
 
-{:SortedSystem}
+SortedSystem

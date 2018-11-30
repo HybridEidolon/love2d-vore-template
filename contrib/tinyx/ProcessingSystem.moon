@@ -1,4 +1,4 @@
-import System from require 'systems.System'
+System = require 'tinyx.System'
 tiny = require 'tiny'
 
 class ProcessingSystem extends System
@@ -9,4 +9,4 @@ class ProcessingSystem extends System
   -- preProcess: (dt) =>
   -- postProcess: (dt) =>
 
-{:ProcessingSystem}
+ProcessingSystem

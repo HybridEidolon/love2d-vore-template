@@ -6,4 +6,4 @@ class System
 
   -- update: (dt) =>
 
-{:System}
+System
